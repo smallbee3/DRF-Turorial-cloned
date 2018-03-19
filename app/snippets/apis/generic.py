@@ -1,4 +1,5 @@
-from rest_framework import mixins, generics, permissions
+from rest_framework import mixins, generics, permissions, renderers
+from rest_framework.response import Response
 
 from snippets.permissions import IsOwnerOrReadOnly
 from ..serializers import SnippetSerializer
@@ -26,3 +27,15 @@ class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
         permissions.IsAuthenticatedOrReadOnly,
         IsOwnerOrReadOnly,
     )
+
+
+# 코드 조각의 하이라이트 버전에 대한 엔드 포인트 만들기
+class SnippetHighlight(generics.GenericAPIView):
+    queryset = Snippet.objects.all()
+    renderer_classes = (
+        renderers.StaticHTMLRenderer,
+    )
+
+    def get(self, request, *args, **kwargs):
+        snippet = self.get_object()
+        return Response(snippet.highlighted)
