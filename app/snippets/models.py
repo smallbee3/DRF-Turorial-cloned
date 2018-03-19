@@ -18,6 +18,7 @@ class Snippet(models.Model):
     language = models.CharField(choices=LANGUAGE_CHOICES, default='python', max_length=100)
     style = models.CharField(choices=STYLE_CHOICES, default='friendly', max_length=100)
 
+    # 4장에서 추가된 필드
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='snippets', on_delete=models.CASCADE)
     highlighted = models.TextField(blank=True)
 
@@ -32,7 +33,7 @@ class Snippet(models.Model):
             style=self.style,
             linenos=linenos,
             full=True,
-            **options,
+            **options,  # 그냥 딕셔너리 이름.
         )
         self.highlighted = highlight(self.code, lexer, formatter)
         super().save(*args, **kwargs)
