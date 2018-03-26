@@ -25,5 +25,4 @@ urlpatterns = [
     path('', APIRoot.as_view(), name='api-root'),
     path('snippets/', include('snippets.urls')),
     path('users/', include('members.urls')),
-
 ]

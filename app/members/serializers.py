@@ -8,10 +8,11 @@ User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     snippets = serializers.HyperlinkedRelatedField(
+
+        # queryset=Snippet.objects.all()
         view_name='snippets:snippet-detail',
         many=True,
         read_only=True,
-        # queryset=Snippet.objects.all()
     )
 
     class Meta:

@@ -9,4 +9,4 @@ urlpatterns = [
     path('<int:pk>/', UserDetail.as_view(), name='user-detail'),
 ]
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+# urlpatterns = format_suffix_patterns(urlpatterns)
